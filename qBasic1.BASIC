@@ -1,6 +1,6 @@
-CLS
+01 CLS 
 10 PRINT "what is your name?"
 20 INPUT "...(Enter Your Name)...", a$
-30 PRINT
+30 PRINT 
 40 PRINT "hello, "; a$; ", I am your computer, nice to meet you."
-60 END
+60 END 

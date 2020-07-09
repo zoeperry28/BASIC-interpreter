@@ -1,12 +1,12 @@
 import os
 import time
 import re
-
+import sys
+import parseLine as PARSE
 def BASIC_CLS():
     time.sleep(2)
     clear = lambda: os.system('clear')
-    clear()
-
+    
 def BASIC_PRINT(OUTSTRING):
     i = 0 
     end = 0
@@ -51,5 +51,19 @@ def BASIC_INPUT(OUTSTRING):
         i+=1
 
     g = input(TO_PRINT) 
-    print(g) 
-
+    
+def BASIC_END(OUTSTRING):
+    quit()
+    
+def BASIC_GOTO(GOTO_LINE, ALL_LINES):
+    count  = 1 
+    LINE_TO_GOTO = GOTO_LINE[2].replace(" ", "") 
+    for row in ALL_LINES:
+        count = count + 1
+        if (row[0].find(LINE_TO_GOTO) != -1):
+            PARSE.BASIC_Parse_Single_Line(row)
+            if(count == len(ALL_LINES)):
+                while(1):
+                  PARSE.BASIC_Parse_Single_Line(row)  
+            else: 
+               PARSE.BASIC_Parse_Line(ALL_LINES)  
