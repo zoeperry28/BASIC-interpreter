@@ -74,11 +74,19 @@ class TextInput:
                 if event.key not in self.keyrepeat_counters:
                     self.keyrepeat_counters[event.key] = [0, event.unicode]
 
+
+                #if event.type == KEYDOWN:
+                #    if event.key == K_BACKSPACE:
+                #        if len(text)>0:
+                #            text = text[:-1]
+                #    else:
+                #        text += event.unicode
+                        
                 if event.key == pl.K_BACKSPACE:
                     self.input_string = (
-                        self.input_string[:max(self.cursor_position - 1, 0)]
-                        + self.input_string[self.cursor_position]
+                        self.input_string[:-1]
                     )
+                    return 3
 
                 if event.key == pl.K_RETURN:
                     self.input_string = self.input_string + "\n"                  
@@ -185,10 +193,7 @@ class New_Output:
         self.OUT_TEXT = OUT_TEXT    # instance variable unique to each instance
         self.OUT = OUT_TEXT
         self.ACTIVE_OUT = start
-    
-    
-    
-    
+        
 if __name__ == "__main__":
     pygame.init()
     # Create TextInput-object
@@ -235,17 +240,13 @@ if __name__ == "__main__":
         font = pygame.font.SysFont("",32)
 
         if(res == 1):
-            
             if((textinput.input_string == "RUN\n")):
                 x = lnk.LINK(ALL_LINES)
                 object_from_exe = x.run_all_lines(y)
-        
                 if(object_from_exe.ACTIVE_OUT == True):
                     TEXT_LINES_TO_SHOW.append([font.render(object_from_exe.OUT, True, (LBLUE)), X_TEXT, Y_TEXT+20])
-            
             try:
                 ALL_LINES[LINE_COUNT] = textinput.input_string
-                
             except: 
                 ALL_LINES.insert(LINE_COUNT, textinput.input_string)
                 
@@ -254,11 +255,14 @@ if __name__ == "__main__":
             textinput.input_string = ""
             X_TEXT = X_TEXT + 0
             Y_TEXT = Y_TEXT + 20
+            
         elif(res == 2):
             print("yeet")
             textinput.input_string = ALL_LINES[LINE_COUNT-1][0:(len(ALL_LINES[LINE_COUNT-1])-1)]
             LINE_COUNT = LINE_COUNT - 1
             Y_TEXT = Y_TEXT - 20
+        elif(res == 3):
+            textinput.input_string = textinput.input_string[0:(len(textinput.input_string))]
         else:
             screen.blit(textinput.get_surface(), (X_TEXT, Y_TEXT))
             temp = Y_TEXT - 20    
