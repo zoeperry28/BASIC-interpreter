@@ -5,7 +5,8 @@ def BASIC_Parse_Line(lines):
         if (LINE[1].find("CLS") != -1):
             KEY.BASIC_CLS()
         elif ((LINE[1].find("PRINT") != -1) or ((LINE[1].find("?") != -1 ))):
-            KEY.BASIC_PRINT(LINE[2])
+            test = KEY.BASIC_PRINT(LINE[2])
+            return test;
         elif (LINE[1].find("INPUT") != -1):
             KEY.BASIC_INPUT(LINE[2])
         elif (LINE[1].find("END") != -1):

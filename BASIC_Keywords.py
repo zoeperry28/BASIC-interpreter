@@ -34,6 +34,7 @@ def BASIC_PRINT(OUTSTRING):
         elif (OUTSTRING.find("$") == -1):
             for i in range(len(ALLSTR)):
                 print(ALLSTR[i])
+                return ALLSTR[i]
     else:
         print("")
 
