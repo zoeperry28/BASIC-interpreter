@@ -177,6 +177,18 @@ class TextInput:
         self.input_string = ""
         self.cursor_position = 0
 
+class New_Output:
+    
+    OUT = ""
+    ACTIVE_OUT = False
+    def __init__(self, OUT_TEXT, start):
+        self.OUT_TEXT = OUT_TEXT    # instance variable unique to each instance
+        self.OUT = OUT_TEXT
+        self.ACTIVE_OUT = start
+    
+    
+    
+    
 if __name__ == "__main__":
     pygame.init()
     # Create TextInput-object
@@ -198,10 +210,9 @@ if __name__ == "__main__":
     C64_BSC = " **** COMMODORE 64 BASIC V2 **** "
     C64_BYTES_FREE = "64K RAM SYSTEM   38911 BASIC BYTES FREE"
     C64_RDY = "READY."
-    
-    f = open("BASIC_INT.txt", "a")
-    
 
+    y = New_Output("", False)
+    
     while True:
     
         screen.fill(LBLUE)
@@ -227,13 +238,16 @@ if __name__ == "__main__":
             
             if((textinput.input_string == "RUN\n")):
                 x = lnk.LINK(ALL_LINES)
-                x.run_all_lines()
+                object_from_exe = x.run_all_lines(y)
+        
+                if(object_from_exe.ACTIVE_OUT == True):
+                    TEXT_LINES_TO_SHOW.append([font.render(object_from_exe.OUT, True, (LBLUE)), X_TEXT, Y_TEXT+20])
+            
             try:
                 ALL_LINES[LINE_COUNT] = textinput.input_string
-                #f.write(textinput.input_string)
+                
             except: 
                 ALL_LINES.insert(LINE_COUNT, textinput.input_string)
-                #f.write(textinput.input_string)
                 
             LINE_COUNT = LINE_COUNT + 1
             TEXT_LINES_TO_SHOW.append([font.render((ALL_LINES[LINE_COUNT-1][0:(len(ALL_LINES[LINE_COUNT-1])-1)]), True, (LBLUE)), X_TEXT, Y_TEXT])

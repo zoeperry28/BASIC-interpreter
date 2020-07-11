@@ -26,7 +26,7 @@ class LINK:
                 if(CURRENT_CHAR.isnumeric() == False):
                     return False;
                     
-    def run_all_lines(self):
+    def run_all_lines(self, y):
         print("ok")
     
         VALID_BASIC = self.check_conventions()
@@ -38,7 +38,9 @@ class LINK:
                 f.write(self.lines[i])
             f.close()
 
-            run.BASIC_Load_Lines("DEMO.BASIC")
+            x = run.BASIC_Load_Lines("DEMO.BASIC", y)
+            return x
         else : 
             print("i dont recognise this...")
-            
+    
+
